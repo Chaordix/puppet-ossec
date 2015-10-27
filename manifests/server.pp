@@ -13,7 +13,6 @@ class ossec::server (
   $ossec_emailnotification             = 'yes',
 ) {
   include ossec::common
-  include mysql::client
 
   # install package
   case $::osfamily {
