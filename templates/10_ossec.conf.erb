@@ -75,6 +75,8 @@
     <!-- Directories to check  (perform all possible verifications) -->
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
     <directories check_all="yes">/bin,/sbin</directories>
+<% @ossec_scanpaths.each do |path| -%>    <directories check_all="yes" report_changes="yes" realtime="no"><%= path %></directories>
+<% end %>
 
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
@@ -106,7 +108,7 @@
     <ignore>C:\WINDOWS/system32/spool</ignore>
     <ignore>C:\WINDOWS/system32/CatRoot</ignore>
 
-<% @ossec_ignorepaths.each do |path| -%>	<ignore><%= @path %></ignore>
+<% @ossec_ignorepaths.each do |path| -%>	<ignore><%= path %></ignore>
 <% end %>
   </syscheck>
 
