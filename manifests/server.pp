@@ -9,6 +9,7 @@ class ossec::server (
   $ossec_email_alert_level             = 7,
   $ossec_ignorepaths                   = [],
   $ossec_scanpaths                     = [],
+  $ossec_white_list                    = [],
   $ossec_emailnotification             = 'yes',
 ) {
   include ossec::common
