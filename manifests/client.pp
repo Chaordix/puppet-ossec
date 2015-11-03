@@ -3,6 +3,7 @@ class ossec::client(
   $ossec_active_response   = true,
   $ossec_server_ip,
   $ossec_emailnotification = 'yes',
+  $ossec_scanpaths = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
   $selinux = false,
 ) {
   include ossec::common
