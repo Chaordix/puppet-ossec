@@ -12,8 +12,8 @@
     <frequency>79200</frequency>
     
     <!-- Directories to check  (perform all possible verifications) -->
-    <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
-    <directories check_all="yes">/bin,/sbin</directories>
+<% @ossec_scanpaths.each do |scanpath| -%>    <directories check_all="yes" report_changes="<%= scanpath["report_changes"] %>" realtime="<%= scanpath['realtime'] %>"><%= scanpath['path']  %></directories>
+<% end %>
 
     <!-- Files/directories to ignore -->
     <ignore>/etc/mtab</ignore>
