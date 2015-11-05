@@ -113,3 +113,8 @@
  Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
   * Unset source parameter to prevent runtime error
 
+2015-11-05 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 1.10.2
+===========================================================
+
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
+  * Remove custom SELinux policy
