@@ -72,6 +72,7 @@ class { "ossec::client":
  * `$ossec_email_alert_level` (default: 7) It correspond to a threshold (from 0 to 156 to sort alert send by email. Some alerts circumvent this threshold (when they have alert_email option),
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
  * `$ossec_white_list` Specify array of IP addresses to be whitelisted by OSSEC
+ * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
 
 
 #### function ossec::email_alert
@@ -107,6 +108,53 @@ About active-response mechanism, check the documentation (and extends the functi
  * `$ossec_active_response` (default: true) allows active response on this host
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
  * `$selinux` (default: false) Whether to install an SELinux policy to allow rotation of OSSEC logs
+ * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
+
+### ossec_scanpaths configuration
+
+Leaving this unconfigured will result on OSSEC using the module defaults. By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin, with real time monitoring disabled and report_changes enabled.
+
+To overwrite the defaults or add in new paths to scan, you can use hiera to overwrite the defaults.
+
+To tell OSSEC to enable real time monitoring of the default paths:
+```
+ossec::client::ossec_scanpaths:
+  - path: /etc
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /usr/bin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /usr/sbin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /bin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /sbin
+    report_changes: 'yes'
+    realtime: 'yes'
+```
+```
+ossec::server::ossec_scanpaths:
+  - path: /etc
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /usr/bin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /usr/sbin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /bin
+    report_changes: 'yes'
+    realtime: 'yes'
+  - path: /sbin
+    report_changes: 'yes'
+    realtime: 'yes'
+```
+
+**Note: Configuring the ossec_scanpaths variable will overwrite the defaults. i.e. if you want to add a new directory to monitor, you must also add the above default paths to be monitored.**
 
 ## Limitations
 
