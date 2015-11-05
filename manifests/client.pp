@@ -97,7 +97,6 @@ class ossec::client(
   if ($::osfamily == 'RedHat' and $selinux == true) {
     selinux::module { 'ossec-logrotate':
       ensure => 'absent',
-      source => 'puppet:///modules/ossec/ossec-logrotate.te',
     }
   }
 
