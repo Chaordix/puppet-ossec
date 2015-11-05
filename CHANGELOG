@@ -100,3 +100,9 @@
   * Work around Atomicorp's incorrect RPM mirrorlist for EL7
   * Add ability to whitelist hosts
   * Clean up package installation
+
+2015-11-05 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 1.10.0
+===========================================================
+
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
+  * Allow configuration of realtime scanning of directories (thanks @TravellingGuy)
