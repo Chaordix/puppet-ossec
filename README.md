@@ -107,7 +107,6 @@ About active-response mechanism, check the documentation (and extends the functi
  * `$ossec_server_ip` IP of the server
  * `$ossec_active_response` (default: true) allows active response on this host
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
- * `$selinux` (default: false) Whether to install an SELinux policy to allow rotation of OSSEC logs
  * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
 
 ### ossec_scanpaths configuration
@@ -164,8 +163,6 @@ a dependency, `inotify-tools`.
 
 On Debian-like systems, this module depends on the [Alienvault repo](http://ossec.alienvault.com/repos/apt/debian/)
 to provide the OSSEC packages.
-
-Enabling SELinux support requires [jfryman/selinux](https://forge.puppetlabs.com/jfryman/selinux)
 
 ## Development
 

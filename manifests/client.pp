@@ -4,7 +4,6 @@ class ossec::client(
   $ossec_server_ip,
   $ossec_emailnotification = 'yes',
   $ossec_scanpaths = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
-  $selinux = false,
 ) {
   include ossec::common
 
@@ -91,13 +90,6 @@ class ossec::client(
     group   => 'ossec',
     mode    => '0755',
     seltype => 'var_log_t',
-  }
-
-  # SELinux policy isn't needed any more
-  if ($::osfamily == 'RedHat' and $selinux == true) {
-    selinux::module { 'ossec-logrotate':
-      ensure => 'absent',
-    }
   }
 
   # Fix up the logrotate file with sensible defaults
