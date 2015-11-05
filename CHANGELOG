@@ -106,3 +106,10 @@
 
  Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
   * Allow configuration of realtime scanning of directories (thanks @TravellingGuy)
+
+2015-11-05 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 1.10.1
+===========================================================
+
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
+  * Unset source parameter to prevent runtime error
+
