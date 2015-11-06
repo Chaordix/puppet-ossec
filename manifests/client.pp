@@ -1,11 +1,14 @@
 # Setup for ossec client
 class ossec::client(
   $ossec_active_response   = true,
-  $ossec_server_ip,
+  $ossec_server_ip         = undef,
   $ossec_emailnotification = 'yes',
-  $ossec_scanpaths = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
+  $ossec_scanpaths         = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
+  $ossec_ip_fact           = '::ipaddress'
 ) {
   include ossec::common
+
+  $client_ip = getvar($ossec_ip_fact)
 
   case $::osfamily {
     'Debian' : {
@@ -66,12 +69,12 @@ class ossec::client(
     ossec::agentkey{ "ossec_agent_${::fqdn}_client":
       agent_id         => $::uniqueid,
       agent_name       => $::fqdn,
-      agent_ip_address => $::ipaddress,
+      agent_ip_address => $client_ip,
     }
     @@ossec::agentkey{ "ossec_agent_${::fqdn}_server":
       agent_id         => $::uniqueid,
       agent_name       => $::fqdn,
-      agent_ip_address => $::ipaddress
+      agent_ip_address => $client_ip
     }
   } else {
     exec { 'agent-auth':
