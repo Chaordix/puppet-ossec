@@ -65,6 +65,21 @@ class ossec::server (
     require   => Package[$ossec::common::hidsserverpackage],
   }
 
+  # configure ossec process list
+  concat { '/var/ossec/bin/.process_list':
+    owner   => 'root',
+    group   => 'ossec',
+    mode    => '0440',
+    require => Package[$ossec::common::hidsserverpackage],
+    notify  => Service[$ossec::common::hidsserverservice]
+  }
+  concat::fragment { 'ossec_process_list_10' :
+    target  => '/var/ossec/bin/.process_list',
+    content => template('ossec/10_process_list.erb'),
+    order   => 10,
+    notify  => Service[$ossec::common::hidsserverservice]
+  }
+
   # configure ossec
   concat { '/var/ossec/etc/ossec.conf':
     owner   => 'root',
@@ -87,10 +102,19 @@ class ossec::server (
     validate_string($ossec_database_type)
     validate_string($ossec_database_username)
 
+    # Enable the database in the config
     concat::fragment { 'ossec.conf_80' :
       target  => '/var/ossec/etc/ossec.conf',
       content => template('ossec/80_ossec.conf.erb'),
       order   => 80,
+      notify  => Service[$ossec::common::hidsserverservice]
+    }
+
+    # Enable the database daemon in the .process_list
+    concat::fragment { 'ossec_process_list_20' :
+      target  => '/var/ossec/bin/.process_list',
+      content => template('ossec/20_process_list.erb'),
+      order   => 20,
       notify  => Service[$ossec::common::hidsserverservice]
     }
   }
