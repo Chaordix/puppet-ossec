@@ -1,7 +1,7 @@
 # Main ossec server config
 class ossec::server (
-  $mailserver_ip,
-  $ossec_emailto,
+  $mailserver_ip                       = undef,
+  $ossec_emailto                       = undef,
   $ossec_emailfrom                     = "ossec@${::domain}",
   $ossec_active_response               = true,
   $ossec_global_host_information_level = 8,
@@ -11,6 +11,12 @@ class ossec::server (
   $ossec_scanpaths                     = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
   $ossec_white_list                    = [],
   $ossec_emailnotification             = 'yes',
+  $ossec_database                      = false,
+  $ossec_database_hostname             = undef,
+  $ossec_database_name                 = undef,
+  $ossec_database_password             = undef,
+  $ossec_database_type                 = undef,
+  $ossec_database_username             = undef,
 ) {
   include ossec::common
   include mysql::client
@@ -73,6 +79,22 @@ class ossec::server (
     order   => 10,
     notify  => Service[$ossec::common::hidsserverservice]
   }
+
+  if $ossec_database {
+    validate_string($ossec_database_hostname)
+    validate_string($ossec_database_name)
+    validate_string($ossec_database_password)
+    validate_string($ossec_database_type)
+    validate_string($ossec_database_username)
+
+    concat::fragment { 'ossec.conf_80' :
+      target  => '/var/ossec/etc/ossec.conf',
+      content => template('ossec/80_ossec.conf.erb'),
+      order   => 80,
+      notify  => Service[$ossec::common::hidsserverservice]
+    }
+  }
+
   concat::fragment { 'ossec.conf_90' :
     target  => '/var/ossec/etc/ossec.conf',
     content => template('ossec/90_ossec.conf.erb'),
