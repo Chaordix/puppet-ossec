@@ -113,6 +113,7 @@ About active-response mechanism, check the documentation (and extends the functi
  * `$ossec_active_response` (default: true) allows active response on this host
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
  * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
+ * `$ossec_ip_fact` (default: ::ipaddress) allow override of the fact used to find the client's IP address.  This is useful for when you have multiple IP addresses on a given client and `::ipaddress` returns the incorrect IP for connection to the OSSEC server
 
 ### ossec_scanpaths configuration
 
