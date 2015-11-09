@@ -31,16 +31,7 @@ class ossec::server (
     }
     'RedHat' : {
       case $::operatingsystem {
-        'CentOS' : {
-          package { 'ossec-hids':
-            ensure   => installed,
-          }
-          package { $ossec::common::hidsserverpackage:
-            ensure  => installed,
-            require => Class['mysql::client'],
-          }
-        }
-        'RedHat' : {
+        'CentOS', 'RedHat' : {
           package { 'ossec-hids':
             ensure   => installed,
           }
@@ -101,6 +92,12 @@ class ossec::server (
     validate_string($ossec_database_password)
     validate_string($ossec_database_type)
     validate_string($ossec_database_username)
+
+    package { $ossec::common::hidsmysqlpackage:
+      ensure  => installed,
+      require => Class['mysql::client'],
+      notify  => Service[$ossec::common::hidsserverservice]
+    }
 
     # Enable the database in the config
     concat::fragment { 'ossec.conf_80' :

@@ -72,6 +72,7 @@ class ossec::common {
       $hidsagentpackage  = 'ossec-hids-client'
       $hidsserverservice = 'ossec-hids'
       $hidsserverpackage = 'ossec-hids-server'
+      $hidsmysqlpackage  = 'ossec-hids-mysql'
       $servicehasstatus  = true
       case $::operatingsystemrelease {
         /^5/:    {$redhatversion='el5'}
