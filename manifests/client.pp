@@ -3,15 +3,8 @@ class ossec::client(
   $ossec_active_response   = true,
   $ossec_server_ip         = undef,
   $ossec_emailnotification = 'yes',
-<<<<<<< HEAD
   $ossec_scanpaths         = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
   $ossec_ip_fact           = '::ipaddress'
-||||||| merged common ancestors
-  $selinux = false,
-=======
-  $ossec_scanpaths = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
-  $selinux = false,
->>>>>>> 0a557dc92aef49f08d7aa429f14b172cb2627883
 ) {
   include ossec::common
 
