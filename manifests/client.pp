@@ -4,7 +4,8 @@ class ossec::client(
   $ossec_server_ip         = undef,
   $ossec_emailnotification = 'yes',
   $ossec_scanpaths         = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
-  $ossec_ip_fact           = '::ipaddress'
+  $ossec_ip_fact           = '::ipaddress',
+  $ossec_package_status    = 'installed'
 ) {
   include ossec::common
 
@@ -13,17 +14,17 @@ class ossec::client(
   case $::osfamily {
     'Debian' : {
       package { $ossec::common::hidsagentpackage:
-        ensure  => installed,
+        ensure  => $ossec_package_status,
         require => Apt::Source['alienvault-ossec'],
       }
     }
     'RedHat' : {
       package { 'ossec-hids':
-        ensure  => installed,
+        ensure  => $ossec_package_status,
         require => Yumrepo['ossec'],
       }
       package { $ossec::common::hidsagentpackage:
-        ensure  => installed,
+        ensure  => $ossec_package_status,
         require => Package['ossec-hids'],
       }
     }
