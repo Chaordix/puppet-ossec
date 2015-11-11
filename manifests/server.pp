@@ -11,6 +11,7 @@ class ossec::server (
   $ossec_scanpaths                     = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
   $ossec_white_list                    = [],
   $ossec_emailnotification             = 'yes',
+  $ossec_package_status                = 'installed'
 ) {
   include ossec::common
   include mysql::client
@@ -19,7 +20,7 @@ class ossec::server (
   case $::osfamily {
     'Debian' : {
       package { $ossec::common::hidsserverpackage:
-        ensure  => installed,
+        ensure  => $ossec_package_status,
         require => Apt::Source['alienvault-ossec'],
       }
     }
@@ -27,19 +28,19 @@ class ossec::server (
       case $::operatingsystem {
         'CentOS' : {
           package { 'ossec-hids':
-            ensure   => installed,
+            ensure   => $ossec_package_status,
           }
           package { $ossec::common::hidsserverpackage:
-            ensure  => installed,
+            ensure  => $ossec_package_status,
             require => Class['mysql::client'],
           }
         }
         'RedHat' : {
           package { 'ossec-hids':
-            ensure   => installed,
+            ensure   => $ossec_package_status,
           }
           package { $ossec::common::hidsserverpackage:
-            ensure  => installed,
+            ensure  => $ossec_package_status,
             require => Class['mysql::client'],
           }
         }
