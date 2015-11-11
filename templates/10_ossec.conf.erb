@@ -1,7 +1,7 @@
 <ossec_config>
   <global>
     <email_notification><%= @ossec_emailnotification %></email_notification>
-	<% @ossec_emailto.each do |emailto| -%><email_to><%= emailto %></email_to><% end -%>
+	<% @ossec_emailto.each do |emailto| -%><email_to><%= emailto %></email_to><% end %>
 	<smtp_server><%= @mailserver_ip %></smtp_server>
 	<email_from><%= @ossec_emailfrom %></email_from>
 	<stats><%= @ossec_global_stat_level %></stats>
