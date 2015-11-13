@@ -74,7 +74,12 @@ class { "ossec::client":
  * `$ossec_white_list` Specify array of IP addresses to be whitelisted by OSSEC
  * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
  * `$ossec_package_status` (default: installed) Package status. See https://docs.puppetlabs.com/references/latest/type.html#package-attribute-ensure
-
+ * `$ossec_database` (default: `false`) Set to `true` to enable database integration for alerts and other outputs.  The following `$ossec_database_*` options are only required when `$ossec_database` is set to `true`.
+ * `$ossec_database_hostname` The hostname of the database server
+ * `$ossec_database_name` The name of the database
+ * `$ossec_database_password` The password to use when connecting to the database
+ * `$ossec_database_type` The type of database server
+ * `$ossec_database_username` The username to use when connecting to the database
 
 #### function ossec::email_alert
  * `$alert_email` email to send to
