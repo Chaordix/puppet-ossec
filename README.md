@@ -30,7 +30,7 @@ The server is configured by installing the `ossec::server` class, and using opti
 ```puppet
 class { 'ossec::server':
   mailserver_ip => 'mailserver.mycompany.com',
-  ossec_emailto => 'nicolas.zin@mycompany.com',
+  ossec_emailto => ['nicolas.zin@mycompany.com', 'person2@mycompany.com'],
 }
 
 ossec::command { 'firewallblock':
@@ -73,6 +73,7 @@ class { "ossec::client":
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
  * `$ossec_white_list` Specify array of IP addresses to be whitelisted by OSSEC
  * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
+ * `$ossec_package_status` (default: installed) Package status. See https://docs.puppetlabs.com/references/latest/type.html#package-attribute-ensure
  * `$ossec_database` (default: `false`) Set to `true` to enable database integration for alerts and other outputs.  The following `$ossec_database_*` options are only required when `$ossec_database` is set to `true`.
  * `$ossec_database_hostname` The hostname of the database server
  * `$ossec_database_name` The name of the database
@@ -114,6 +115,7 @@ About active-response mechanism, check the documentation (and extends the functi
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
  * `$ossec_scanpaths` Specify hash of paths to scan, with realtime and report_changes (see below for configuration)
  * `$ossec_ip_fact` (default: ::ipaddress) allow override of the fact used to find the client's IP address.  This is useful for when you have multiple IP addresses on a given client and `::ipaddress` returns the incorrect IP for connection to the OSSEC server
+ * `$ossec_package_status` (default: installed) Package status. See https://docs.puppetlabs.com/references/latest/type.html#package-attribute-ensure
 
 ### ossec_scanpaths configuration
 
