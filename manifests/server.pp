@@ -11,7 +11,7 @@ class ossec::server (
   $ossec_scanpaths                     = [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'no', 'realtime' => 'no'} ],
   $ossec_white_list                    = [],
   $ossec_emailnotification             = 'yes',
-  $ossec_package_status                = 'installed'
+  $ossec_package_status                = 'installed',
   $ossec_database                      = false,
   $ossec_database_hostname             = undef,
   $ossec_database_name                 = undef,
